@@ -1,186 +1,194 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Secur-IT UAS | Video</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secur-IT UAS | Video</title>
 
-  <style>
-    :root{
-      --bg1:#0b0c10;
-      --bg2:#121826;
-      --card:rgba(255,255,255,0.045);
-      --border:rgba(255,255,255,0.10);
-      --text:#ffffff;
-      --muted:rgba(255,255,255,0.70);
-      --shadow1:rgba(0,0,0,0.45);
-      --shadow2:rgba(0,0,0,0.25);
-      --radius:18px;
-    }
+<style>
 
-    *{ box-sizing:border-box; }
+:root{
+--bg1:#0b0c10;
+--bg2:#121826;
+--card:rgba(255,255,255,0.045);
+--border:rgba(255,255,255,0.10);
+--text:#ffffff;
+}
 
-    body{
-      margin:0;
-      min-height:100vh;
-      background:radial-gradient(1200px 700px at 50% 0%, rgba(255,255,255,0.05), transparent 55%),
-                 linear-gradient(145deg,var(--bg1),var(--bg2));
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      text-align:center;
-      display:flex;
-      flex-direction:column;
-    }
+body{
+margin:0;
+min-height:100vh;
+background:radial-gradient(1200px 700px at 50% 0%, rgba(255,255,255,0.05), transparent 55%),
+linear-gradient(145deg,var(--bg1),var(--bg2));
+font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+color:var(--text);
+text-align:center;
+}
 
-    .header{
-      background:#ffffff;
-      padding:18px 16px;
-    }
+.header{
+background:#fff;
+padding:18px 16px;
+}
 
-    .logo{
-      max-width:520px;
-      width:92%;
-      height:auto;
-      display:block;
-      margin:0 auto;
-    }
+.logo{
+max-width:520px;
+width:92%;
+display:block;
+margin:auto;
+}
 
-    /* Cleaner, less "template" looking card */
-    .page-card{
-      width:min(1040px, calc(100% - 32px));
-      margin:40px auto 28px;
-      padding:34px 22px 26px;
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:
-        0 18px 55px var(--shadow1),
-        0 2px 10px var(--shadow2);
-    }
+.page-card{
+width:min(1040px, calc(100% - 32px));
+margin:40px auto;
+padding:34px 22px;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:18px;
+box-shadow:0 18px 55px rgba(0,0,0,0.45);
+}
 
-    /* Video: keep it "floating" but not overly dramatic */
-    .video-wrapper{
-      position:relative;
-      width:100%;
-      padding-bottom:56.25%;
-      border-radius:14px;
-      overflow:hidden;
-      box-shadow:0 10px 30px rgba(0,0,0,0.45);
-      background:rgba(0,0,0,0.35);
-    }
+/* VIDEO PLAYER */
 
-    .video-wrapper iframe{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      border:0;
-    }
+.video-container{
+position:relative;
+width:100%;
+padding-bottom:56.25%;
+border-radius:14px;
+overflow:hidden;
+background:#000;
+cursor:pointer;
+}
 
-    /* AirData should be a trust marker, not the headline */
-    .airdata{
-      margin-top:18px;
-      display:flex;
-      justify-content:center;
-    }
+.video-container img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+}
 
-    .airdata img{
-      width:min(360px, 92%);
-      height:auto;
-      border:0;
-      opacity:0.95;
-    }
+.play-button{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:90px;
+height:90px;
+background:rgba(0,0,0,0.6);
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+}
 
-    /* Bigger, cleaner icons */
-    .links{
-      margin-top:14px;
-      display:flex;
-      justify-content:center;
-      gap:14px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
+.play-button:after{
+content:'';
+border-style:solid;
+border-width:18px 0 18px 28px;
+border-color:transparent transparent transparent white;
+margin-left:6px;
+}
 
-    .icon-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:56px;
-      height:56px;
-      border-radius:14px;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.12);
-      box-shadow:0 8px 20px rgba(0,0,0,0.25);
-      transition:transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
-    }
+/* Airdata */
 
-    .icon-link:hover{
-      transform:scale(1.06);
-      background:rgba(255,255,255,0.10);
-      box-shadow:0 10px 26px rgba(0,0,0,0.35);
-    }
+.airdata{
+margin-top:20px;
+}
 
-    .icon{
-      width:28px;
-      height:28px;
-      display:block;
-    }
+.airdata img{
+width:360px;
+max-width:90%;
+}
 
-    .note{
-      margin-top:14px;
-      font-size:13px;
-      color:var(--muted);
-    }
+/* Icons */
 
-    @media (max-width:520px){
-      .page-card{ padding:22px 14px 18px; }
-      .icon-link{ width:58px; height:58px; }
-      .icon{ width:30px; height:30px; }
-      .airdata img{ width:min(320px, 94%); }
-    }
-  </style>
+.links{
+margin-top:16px;
+display:flex;
+justify-content:center;
+gap:14px;
+}
+
+.icon-link{
+width:56px;
+height:56px;
+border-radius:14px;
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.12);
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.icon{
+width:28px;
+}
+
+.note{
+margin-top:14px;
+font-size:13px;
+opacity:.7;
+}
+
+</style>
 </head>
 
 <body>
 
-  <div class="header">
-    <!-- Upload your header logo to the repo as: logo.png -->
-    <img src="logo.png" class="logo" alt="Secur-IT UAS" />
-  </div>
+<div class="header">
+<img src="logo.png" class="logo">
+</div>
 
-  <div class="page-card">
+<div class="page-card">
 
-    <div class="video-wrapper">
-      <iframe
-src="https://www.youtube.com/embed/cLfhc265Jvc?rel=0&modestbranding=1"
-        title="Secur-IT UAS Video"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </div>
+<div class="video-container" id="videoPlayer">
 
-    <div class="airdata">
-      <a href="https://certificates.airdata.com/BmNedR" target="_blank" rel="noopener">
-        <img
-          alt="Airdata UAV Drone Safety Verified Badge"
-          src="https://certificates.airdata.com/badge?i=BmNedR&r=gYp3&t=7&m=3&size=12&c=0">
-      </a>
-    </div>
+<img src="thumbnail.jpg" alt="Video thumbnail">
 
-    <div class="links">
-      <!-- Upload square icons as: website.png and linkedin.png -->
-      <a class="icon-link" href="https://secur-it.co.uk" target="_blank" rel="noopener" aria-label="Secur-IT Website">
-        <img src="website.png" class="icon" alt="" />
-      </a>
+<div class="play-button"></div>
 
-      <a class="icon-link" href="https://www.linkedin.com/company/secur-it-group/posts/?feedView=all" target="_blank" rel="noopener" aria-label="Secur-IT LinkedIn">
-        <img src="linkedin.png" class="icon" alt="" />
-      </a>
-    </div>
+</div>
 
-    <div class="note">Secur-IT UAS Division</div>
+<div class="airdata">
+<a href="https://certificates.airdata.com/BmNedR" target="_blank">
+<img src="https://certificates.airdata.com/badge?i=BmNedR&r=gYp3&t=7&m=3&size=12&c=0">
+</a>
+</div>
 
-  </div>
+<div class="links">
+
+<a class="icon-link" href="https://secur-it.co.uk" target="_blank">
+<img src="website.png" class="icon">
+</a>
+
+<a class="icon-link" href="https://www.linkedin.com/company/secur-it-group/posts/?feedView=all" target="_blank">
+<img src="linkedin.png" class="icon">
+</a>
+
+</div>
+
+<div class="note">
+Secur-IT UAS Division
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("videoPlayer").addEventListener("click", function() {
+
+this.innerHTML = `<iframe
+width="100%"
+height="100%"
+src="https://www.youtube.com/embed/cLfhc265Jvc?autoplay=1&rel=0&modestbranding=1"
+frameborder="0"
+allow="autoplay; encrypted-media"
+allowfullscreen
+style="position:absolute;top:0;left:0;width:100%;height:100%;">
+</iframe>`;
+
+});
+
+</script>
 
 </body>
 </html>
