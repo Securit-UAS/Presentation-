@@ -46,12 +46,8 @@ z-index:-1;
 }
 
 @keyframes glowMove{
-0%{
-transform:translateY(-40px);
-}
-100%{
-transform:translateY(40px);
-}
+0%{ transform:translateY(-40px); }
+100%{ transform:translateY(40px); }
 }
 
 .header{
@@ -85,36 +81,15 @@ padding-bottom:56.25%;
 border-radius:14px;
 overflow:hidden;
 background:#000;
-cursor:pointer;
 }
 
-.video-container img{
+.video-container iframe{
 position:absolute;
+top:0;
+left:0;
 width:100%;
 height:100%;
-object-fit:cover;
-}
-
-.play-button{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:90px;
-height:90px;
-background:rgba(0,0,0,0.6);
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-.play-button:after{
-content:'';
-border-style:solid;
-border-width:18px 0 18px 28px;
-border-color:transparent transparent transparent white;
-margin-left:6px;
+border:0;
 }
 
 /* airdata */
@@ -175,11 +150,14 @@ opacity:.7;
 
 <div class="page-card">
 
-<div class="video-container" id="videoPlayer">
+<div class="video-container">
 
-<img src="thumbnail.jpg">
-
-<div class="play-button"></div>
+<iframe
+src="https://www.youtube.com/embed/cLfhc265Jvc?rel=0&modestbranding=1"
+title="Secur-IT UAS Demo"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen>
+</iframe>
 
 </div>
 
@@ -206,22 +184,6 @@ Secur-IT UAS Division
 </div>
 
 </div>
-
-<script>
-
-document.getElementById("videoPlayer").addEventListener("click", function() {
-
-this.innerHTML = `<iframe
-src="https://www.youtube.com/embed/cLfhc265Jvc"
-frameborder="0"
-allow="autoplay; encrypted-media"
-allowfullscreen
-style="position:absolute;top:0;left:0;width:100%;height:100%;">
-</iframe>`;
-
-});
-
-</script>
 
 </body>
 </html>
