@@ -6,7 +6,6 @@
 <title>Securit Commercial Drone Services | Video</title>
 
 <style>
-
 :root{
 --bg1:#0b0c10;
 --bg2:#121826;
@@ -70,16 +69,56 @@ border-radius:18px;
 box-shadow:0 18px 55px rgba(0,0,0,0.45);
 }
 
-.video-container{
+/* CUSTOM VIDEO PLAYER */
+
+.video-wrapper{
 position:relative;
 width:100%;
 padding-bottom:56.25%;
 border-radius:14px;
 overflow:hidden;
 background:#000;
+cursor:pointer;
 }
 
-.video-container iframe{
+.video-thumb{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+top:0;
+left:0;
+}
+
+.play-button{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:80px;
+height:80px;
+border-radius:50%;
+background:rgba(0,0,0,0.6);
+display:flex;
+align-items:center;
+justify-content:center;
+transition:.2s;
+}
+
+.play-button::before{
+content:"";
+border-style:solid;
+border-width:12px 0 12px 20px;
+border-color:transparent transparent transparent white;
+margin-left:4px;
+}
+
+.video-wrapper:hover .play-button{
+transform:translate(-50%,-50%) scale(1.1);
+background:rgba(0,0,0,0.8);
+}
+
+.video-wrapper iframe{
 position:absolute;
 top:0;
 left:0;
@@ -90,8 +129,14 @@ border:0;
 
 /* compliance badge */
 
-.compliance-badge{
+.compliance-link{
+display:inline-block;
 margin-top:20px;
+text-decoration:none;
+color:inherit;
+}
+
+.compliance-badge{
 display:inline-flex;
 align-items:center;
 justify-content:center;
@@ -101,33 +146,30 @@ border-radius:14px;
 background:rgba(255,255,255,0.06);
 border:1px solid rgba(255,255,255,0.12);
 box-shadow:0 10px 30px rgba(0,0,0,0.25);
-flex-wrap:wrap;
+cursor:pointer;
+transition:.2s;
+}
+
+.compliance-badge:hover{
+transform:scale(1.02);
+box-shadow:0 14px 40px rgba(0,0,0,0.35);
 }
 
 .compliance-logo{
 height:42px;
-width:auto;
-display:block;
 background:#fff;
 padding:4px 8px;
 border-radius:6px;
 }
 
-.compliance-text{
-text-align:left;
-line-height:1.25;
-}
-
 .compliance-title{
 font-size:15px;
 font-weight:700;
-letter-spacing:.2px;
 }
 
 .compliance-subtitle{
 font-size:12px;
 opacity:.75;
-margin-top:2px;
 }
 
 .links{
@@ -163,46 +205,42 @@ margin-top:14px;
 font-size:13px;
 opacity:.7;
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="header">
-<img src="logo.jpg" class="logo" alt="Securit logo">
+<img src="logo.jpg" class="logo">
 </div>
 
 <div class="page-card">
 
-<div class="video-container">
-<iframe
-src="https://www.youtube.com/embed/AXboor4SRIA?rel=0&modestbranding=1"
-title="Securit Commercial Drone Services UAS Demo"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-allowfullscreen>
-</iframe>
+<!-- CUSTOM PLAYER -->
+<div class="video-wrapper" onclick="loadVideo(this)">
+<img class="video-thumb" src="https://img.youtube.com/vi/AXboor4SRIA/maxresdefault.jpg">
+<div class="play-button"></div>
 </div>
 
+<!-- CAA BADGE -->
+<a class="compliance-link" href="https://www.caa.co.uk/publication/download/19985" target="_blank">
 <div class="compliance-badge">
-<img class="compliance-logo" src="CAA.svg" alt="CAA Logo">
-
-<div class="compliance-text">
+<img class="compliance-logo" src="CAA.svg">
+<div>
 <div class="compliance-title">CAA PDRA01 Operational Authorisation Holder</div>
 <div class="compliance-subtitle">Commercial UAS operations under CAA regulatory framework</div>
 </div>
 </div>
+</a>
 
 <div class="links">
-
 <a class="icon-link" href="https://secur-it.co.uk" target="_blank">
-<img src="website.png" class="icon" alt="Website">
+<img src="website.png" class="icon">
 </a>
 
 <a class="icon-link" href="https://www.linkedin.com/company/secur-it-group/posts/?feedView=all" target="_blank">
-<img src="linkedin.png" class="icon" alt="LinkedIn">
+<img src="linkedin.png" class="icon">
 </a>
-
 </div>
 
 <div class="note">
@@ -210,6 +248,17 @@ Securit Commercial Drone Services
 </div>
 
 </div>
+
+<script>
+function loadVideo(el){
+el.innerHTML = `
+<iframe
+src="https://www.youtube.com/embed/AXboor4SRIA?autoplay=1&rel=0&modestbranding=1"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen>
+</iframe>`;
+}
+</script>
 
 </body>
 </html>
